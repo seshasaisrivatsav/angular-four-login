@@ -1,0 +1,9 @@
+<h1>Websites</h1>
+
+{{websites.length}}
+
+<ul>
+  <li *ngFor="let website of websites">
+    {{website.name}}<button (click)="removeWebsite(website)">X</button>
+  </li>
+</ul>

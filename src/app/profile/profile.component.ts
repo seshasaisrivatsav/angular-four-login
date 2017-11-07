@@ -1,5 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {SharedService} from '../../../server/services/shared.service.client';
+import {ActivatedRoute, Router} from '@angular/router';
+import {UserService} from '../services/user.service.server';
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +11,22 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit, OnDestroy {
   username: string;
   paramSubscriptions;
-  constructor(private activatedRoute: ActivatedRoute) { }
+  user = {};
+  constructor(private router: Router,
+              private userService: UserService,
+              private sharedService: SharedService,
+              private activatedRoute: ActivatedRoute) { }
+  logout() {
+    this.userService.logout()
+      .subscribe((status) => {
+        this.router.navigate(['login']);
+      });
+  }
 
   ngOnInit() {
     this.paramSubscriptions = this.activatedRoute.params
       .subscribe(params => {
+        this.user = this.sharedService.user || {};
         this.username = params['username'];
       });
   }
