@@ -9,8 +9,9 @@ export class UserService {
 
   constructor(private http: Http, private router: Router, private sharedService: SharedService){}
   logout() {
+    this.options.withCredentials = true;
     const url = 'http://localhost:3100/api/logout';
-    return this.http.post(url, {})
+    return this.http.post(url, '',  this.options)
       .map((status) => {
         return status;
       });
