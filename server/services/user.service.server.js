@@ -9,7 +9,7 @@ module.exports = function (app) {
 
   app.post('/api/register', register);
   app.post('/api/login', passport.authenticate('local'), login);
-  app.get('/api/loggedIn', loggedIn);
+  app.post('/api/loggedIn', loggedIn);
   app.post('/api/logout', logout);
 
   function logout(req, res) {
@@ -54,7 +54,7 @@ module.exports = function (app) {
     done(null, user);
   }
   function deserializeUser(user, done) {
-    developerModel
+    userModel
       .findDeveloperById(user._id)
       .then(
         function(user){

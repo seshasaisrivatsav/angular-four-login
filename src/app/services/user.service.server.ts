@@ -6,26 +6,29 @@ import 'rxjs/Rx';
 export class UserService {
   options = new RequestOptions();
   logout() {
+    this.options.withCredentials = true;
     const url = 'http://localhost:3100/api/logout';
-    return this.http.post(url, {})
+    return this.http.post(url, {}, this.options)
       .map((status) => {
         return status;
       });
   }
   loggedIn() {
+    this.options.withCredentials = true;
     const url = 'http://localhost:3100/api/loggedIn';
-    return this.http.get(url)
+    return this.http.post(url, {}, this.options)
       .map((user) => {
         return user.json();
       });
   }
   register(username, password) {
+    this.options.withCredentials = true;
     const url = 'http://localhost:3100/api/register';
     const credentials = {
       username: username,
       password: password
     };
-    return this.http.post(url, credentials)
+    return this.http.post(url, credentials, this.options)
       .map((response: Response) => {
         return response.json();
       });
@@ -37,7 +40,7 @@ export class UserService {
       username: username,
       password: password
     };
-    return this.http.post(url, credentials) // this.options)
+    return this.http.post(url, credentials, this.options)
       .map((response: Response) => {
         return response.json();
       });
