@@ -19,14 +19,11 @@ module.exports = function (app) {
   }
 
   function loggedIn(req, res) {
-    //console.log(req.isAuthenticated());
-    // if(req.isAuthenticated()) {
-    //
-    //   res.json(req.user);
-    // } else {
-    //   res.send('0');
-    // }
-    res.send(req.isAuthenticated() ? req.user : '0');
+    if(req.isAuthenticated()) {
+      res.json(req.user);
+    } else {
+      res.send('0');
+    }
   }
 
   function register(req, res) {
@@ -52,43 +49,23 @@ module.exports = function (app) {
     );
   }
   function login(req, res) {
-    console.log("In login");
-    console.log(req.user);
     res.json(req.user);
   }
 
   function serializeUser(user, done) {
-    console.log("serializing");
-    console.log(user);
     done(null, user);
   }
-  // function deserializeUser(user, done) {
-  //   developerModel
-  //     .findDeveloperById(user._id)
-  //     .then(
-  //       function(user){
-  //         done(null, user);
-  //       },
-  //       function(err){
-  //         done(err, null);
-  //       }
-  //     );
-  // }
-
 
   function deserializeUser(user, done) {
-
     userModel
-      .findDeveloperById(user._id)
-
+      .findUserById(user._id)
       .then(
         function(user){
           done(null, user);
         },
         function(err){
           done(err, null);
-        }
-      );
+      });
   }
 
   function localStrategy(username, password, done) {
