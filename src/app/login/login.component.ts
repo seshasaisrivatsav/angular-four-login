@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
       .subscribe((user) => {
         this.sharedService.user = user;
         console.log(this.sharedService.user)
+
         this.router.navigate(['/profile']);
       });
   }
