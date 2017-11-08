@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {UserService} from '../services/user.service.server';
+import {UserService} from '../services/user.service.client';
 import {SharedService} from '../../../server/services/shared.service.client';
 
 @Component({
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
     this.userService.login(this.username, this.password)
       .subscribe((user) => {
         this.sharedService.user = user;
-        this.router.navigate(['profile']);
+        console.log(this.sharedService.user)
+        this.router.navigate(['/profile']);
       });
   }
 

@@ -19,7 +19,7 @@ import { WidgetParagraphComponent } from './widget/widget-paragraph/widget-parag
 import { WidgetIframeComponent } from './widget/widget-iframe/widget-iframe.component';
 import {SafePipe} from './safe-pipe';
 import {ToUpperCasePipe} from './pipes/to-upper.pipe.client';
-import {UserService} from './services/user.service.server';
+import {UserService} from './services/user.service.client';
 import {SharedService} from '../../server/services/shared.service.client';
 import {AuthenticationService} from "./services/authentication.service.client";
 

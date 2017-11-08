@@ -1,6 +1,7 @@
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 module.exports = function (app) {
-  var passport = require('passport');
-  var LocalStrategy = require('passport-local').Strategy;
+
   passport.use(new LocalStrategy(localStrategy));
   passport.serializeUser(serializeUser);
   passport.deserializeUser(deserializeUser);
@@ -9,7 +10,7 @@ module.exports = function (app) {
 
   app.post('/api/register', register);
   app.post('/api/login', passport.authenticate('local'), login);
-  app.get('/api/loggedIn', loggedIn);
+  app.post('/api/loggedIn', loggedIn);
   app.post('/api/logout', logout);
 
   function logout(req, res) {
@@ -18,15 +19,19 @@ module.exports = function (app) {
   }
 
   function loggedIn(req, res) {
-    if(req.isAuthenticated()) {
-      res.json(req.user);
-    } else {
-      res.send('0');
-    }
+    //console.log(req.isAuthenticated());
+    // if(req.isAuthenticated()) {
+    //
+    //   res.json(req.user);
+    // } else {
+    //   res.send('0');
+    // }
+    res.send(req.isAuthenticated() ? req.user : '0');
   }
 
   function register(req, res) {
     var user = req.body;
+    console.log("IN SER" + user);
     userModel
       .createUser(user)
       .then(
@@ -47,15 +52,34 @@ module.exports = function (app) {
     );
   }
   function login(req, res) {
+    console.log("In login");
+    console.log(req.user);
     res.json(req.user);
   }
 
   function serializeUser(user, done) {
+    console.log("serializing");
+    console.log(user);
     done(null, user);
   }
+  // function deserializeUser(user, done) {
+  //   developerModel
+  //     .findDeveloperById(user._id)
+  //     .then(
+  //       function(user){
+  //         done(null, user);
+  //       },
+  //       function(err){
+  //         done(err, null);
+  //       }
+  //     );
+  // }
+
+
   function deserializeUser(user, done) {
-    developerModel
-      .findDeveloperById(user._id)
+    console.log("Deserializing");
+    userModel
+      .findUserById(user._id)
       .then(
         function(user){
           done(null, user);
@@ -65,12 +89,14 @@ module.exports = function (app) {
         }
       );
   }
+
   function localStrategy(username, password, done) {
     userModel
       .findUserByCredentials(username, password)
       .then(
         function(user) {
           if(user.username === username && user.password === password) {
+            console.log(user);
             return done(null, user);
           } else {
             return done(null, false);

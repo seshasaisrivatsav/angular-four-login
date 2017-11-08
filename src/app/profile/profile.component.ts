@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {SharedService} from '../../../server/services/shared.service.client';
 import {ActivatedRoute, Router} from '@angular/router';
-import {UserService} from '../services/user.service.server';
+import {UserService} from '../services/user.service.client';
 
 @Component({
   selector: 'app-profile',
@@ -11,7 +11,7 @@ import {UserService} from '../services/user.service.server';
 export class ProfileComponent implements OnInit, OnDestroy {
   username: string;
   paramSubscriptions;
-  user = {};
+  user : any;
   constructor(private router: Router,
               private userService: UserService,
               private sharedService: SharedService,
