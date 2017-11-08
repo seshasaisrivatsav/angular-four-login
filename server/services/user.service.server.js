@@ -77,9 +77,10 @@ module.exports = function (app) {
 
 
   function deserializeUser(user, done) {
-    console.log("Deserializing");
+
     userModel
-      .findUserById(user._id)
+      .findDeveloperById(user._id)
+
       .then(
         function(user){
           done(null, user);

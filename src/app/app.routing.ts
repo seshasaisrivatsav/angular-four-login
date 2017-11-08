@@ -5,8 +5,10 @@ import { ProfileComponent } from './profile/profile.component';
 import {WebsiteListComponent} from './website/website-list/website-list.component';
 import {WidgetListComponent} from './widget/widget-list/widget-list.component';
 import {AuthenticationService} from './services/authentication.service.client';
+// import {FormExperimentComponent} from './experiments/form-experiment/form-experiment.component';
 
 const appRoutes: Routes = [
+  // { path: 'form', component: FormExperimentComponent },
   { path: 'widget', component: WidgetListComponent },
   { path: 'website', component: WebsiteListComponent },
   { path: 'login', component: LoginComponent },

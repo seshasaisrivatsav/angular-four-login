@@ -21,7 +21,10 @@ import {SafePipe} from './safe-pipe';
 import {ToUpperCasePipe} from './pipes/to-upper.pipe.client';
 import {UserService} from './services/user.service.client';
 import {SharedService} from '../../server/services/shared.service.client';
-import {AuthenticationService} from "./services/authentication.service.client";
+import {AuthenticationService} from './services/authentication.service.client';
+//
+// import { FormExperimentComponent } from './experiments/form-experiment/form-experiment.component';
+// import { UserComponent } from './experiments/user/user.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +38,9 @@ import {AuthenticationService} from "./services/authentication.service.client";
     WidgetParagraphComponent,
     WidgetIframeComponent,
     SafePipe,
-    ToUpperCasePipe
+    ToUpperCasePipe,
+    // FormExperimentComponent,
+    // UserComponent
   ],
   imports: [
     BrowserModule,

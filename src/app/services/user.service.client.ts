@@ -23,10 +23,10 @@ export class UserService {
     this.options.withCredentials = true;
     console.log("tryin to loggedIn");
     return this.http.post(url, '', this.options)
-      // .map((user) => {
-      //   console.log(user);
-      //   return user.json();
-      // });
+    // .map((user) => {
+    //   console.log(user);
+    //   return user.json();
+    // });
       .map(
         (res: Response) => {
           const user = res.json();
