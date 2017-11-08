@@ -4,7 +4,7 @@ var userModel = mongoose.model("UserModel", userSchema);
 userModel.createUser = createUser;
 userModel.findUserByCredentials = findUserByCredentials;
 
-userModel.findDeveloperById = findDeveloperById;
+userModel.findUserById = findUserById;
 
 module.exports = userModel;
 function createUser(user) {
@@ -14,7 +14,7 @@ function findUserByCredentials(username, password) {
   return userModel.findOne({username: username, password: password});
 }
 
-function findDeveloperById(userId) {
+function findUserById(userId) {
   return userModel.findById(userId);
 
 }

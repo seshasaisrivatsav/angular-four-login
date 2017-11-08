@@ -13,7 +13,6 @@ const appRoutes: Routes = [
   { path: 'website', component: WebsiteListComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  //{ path: 'profile/:username', component: ProfileComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthenticationService] },
   { path: '', pathMatch: 'full', redirectTo: 'login'}
 ];
